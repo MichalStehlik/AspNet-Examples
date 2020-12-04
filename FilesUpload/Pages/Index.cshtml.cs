@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Mime;
 
-namespace FileUpload.Pages
+namespace FilesUpload.Pages
 {
     public class IndexModel : PageModel
     {
