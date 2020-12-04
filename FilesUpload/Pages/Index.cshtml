@@ -1,0 +1,32 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@if (Model.Files.Count > 0)
+{
+    <table class="table table-striped table-responsive">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var f in Model.Files)
+            {
+                <tr>
+                    <td>@f</td>
+                    <td>
+                        <a class="btn btn-sm btn-primary" asp-page-handler="download" asp-route-filename="@f">Download</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>There are no files uploaded yet.</p>
+}
