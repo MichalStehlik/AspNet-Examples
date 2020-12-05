@@ -21,14 +21,26 @@
             @foreach (var f in Model.Files)
             {
             <tr>
-                <td></td>
+                @if (f.ThumbnailCount > 0)
+                {
+                    <td><img src="@Url.Page("/Index","Thumbnail", new {filename=f.Id })" /></td>
+                }
+                else
+                {
+                    <td></td>
+                }
                 <td>@f.OriginalName</td>
                 <td>@f.ContentType</td>
                 <td>@f.Uploader.UserName</td>
                 <td>@f.UploadedAt</td>
                 <td>
                     <a class="btn btn-sm btn-primary" asp-page-handler="download" asp-route-filename="@f.Id">Download</a>
-                </td>
+                    @if (f.ThumbnailCount > 0)
+                    {
+                        <a class="btn btn-sm btn-secondary" asp-page-handler="thumbnail" asp-route-filename="@f.Id">Thumbnail</a>
+                        <a class="btn btn-sm btn-secondary" asp-page-handler="thumbnail" asp-route-filename="@f.Id" asp-route-type="1">Miniature</a>
+                    }
+                    </td>
             </tr>
             }
         </tbody>
