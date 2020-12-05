@@ -21,11 +21,11 @@ namespace FilesUpload.Pages
     [Authorize]
     public class UploadModel : PageModel
     {
-        private IWebHostEnvironment _environment;
-        private ApplicationDbContext _context;
-        private IConfiguration _configuration;
-        private int _squareSize = 72;
-        private int _sameAspectRatioHeigth = 72;
+        private readonly IWebHostEnvironment _environment;
+        private readonly ApplicationDbContext _context;
+        private readonly IConfiguration _configuration;
+        private readonly int _squareSize = 64;
+        private readonly int _sameAspectRatioHeigth = 128;
 
 
         [TempData]
@@ -38,8 +38,8 @@ namespace FilesUpload.Pages
             _environment = environment;
             _context = context;
             _configuration = configuration;
-            Int32.TryParse(_configuration["Thumbnails:SquareSize"], out _squareSize);
-            Int32.TryParse(_configuration["Thumbnails:SameAspectRatioHeigth"], out _sameAspectRatioHeigth);
+            if (Int32.TryParse(_configuration["Thumbnails:SquareSize"], out _squareSize) == false) _squareSize = 64;
+            if (Int32.TryParse(_configuration["Thumbnails:SameAspectRatioHeigth"], out _sameAspectRatioHeigth) == false) _sameAspectRatioHeigth = 128;
         }
 
         public void OnGet()

@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,9 +16,8 @@ namespace FilesUpload.Pages
 {
     public class IndexModel : PageModel
     {
-        private IWebHostEnvironment _environment;
-        private readonly ILogger<IndexModel> _logger;
-        private ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
+        private readonly ApplicationDbContext _context;
 
         [TempData]
         public string SuccessMessage { get; set; }
@@ -27,9 +25,8 @@ namespace FilesUpload.Pages
         public string ErrorMessage { get; set; }
         public ICollection<StoredFileListViewModel> Files { get; set; }
 
-        public IndexModel(ILogger<IndexModel> logger, IWebHostEnvironment environment, ApplicationDbContext context)
+        public IndexModel(IWebHostEnvironment environment, ApplicationDbContext context)
         {
-            _logger = logger;
             _environment = environment;
             _context = context;
         }
@@ -47,7 +44,7 @@ namespace FilesUpload.Pages
                     UploaderId = f.UploaderId,
                     Uploader = f.Uploader,
                     UploadedAt = f.UploadedAt,
-                    ThumbnailCount = f.Thumbnails.Count()
+                    ThumbnailCount = f.Thumbnails.Count
                 })
                 .ToList();
         }
