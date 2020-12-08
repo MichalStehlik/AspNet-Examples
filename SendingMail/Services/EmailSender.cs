@@ -9,12 +9,11 @@ namespace SendingMail.Services
 {
     public class EmailSender: IEmailSender
     {
-        public string HtmlMessage { get; set; }
-        public IConfiguration Configuration { get; protected set; }
+        protected IConfiguration _configuration;
 
         public EmailSender(IConfiguration configuration)
         {
-            Configuration = configuration;
+            _configuration = configuration;
         }
 
         /// <summary>
@@ -24,29 +23,27 @@ namespace SendingMail.Services
         /// <param name="subject">předmět mailu</param>
         /// <param name="text">plain textová podoba obsahu</param>
         /// <returns>nic</returns>
-        public Task SendEmailAsync(string email, string subject, string text)
+        public async Task SendEmailAsync(string email, string subject, string text)
         {
             var message = new MimeMessage();
-            message.From.Add(new MailboxAddress(Configuration["EmailSender:FromName"], Configuration["EmailSender:From"]));
+            message.From.Add(new MailboxAddress(_configuration["EmailSender:FromName"], _configuration["EmailSender:From"]));
             message.To.Add(new MailboxAddress(email, email));
             message.Subject = subject;
 
             var bodyBuilder = new BodyBuilder();
-            if (HtmlMessage != "") bodyBuilder.HtmlBody = HtmlMessage;
             bodyBuilder.TextBody = text;
             bodyBuilder.HtmlBody = text;
 
             message.Body = bodyBuilder.ToMessageBody();
 
-            Int32.TryParse(Configuration["EmailSender:Port"], out int port);
+            if (Int32.TryParse(_configuration["EmailSender:Port"], out int port) == false) port = 0;
             using (var client = new SmtpClient())
             {
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                client.Connect(Configuration["EmailSender:Server"], port, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
-                client.Authenticate(Configuration["EmailSender:Username"], Configuration["EmailSender:Password"]);
-                client.Send(message);
-                client.Disconnect(true);
-                return Task.FromResult(0);
+                await client.ConnectAsync(_configuration["EmailSender:Server"], port, MailKit.Security.SecureSocketOptions.StartTlsWhenAvailable);
+                await client.AuthenticateAsync(_configuration["EmailSender:Username"], _configuration["EmailSender:Password"]);
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
             }
         }
     }

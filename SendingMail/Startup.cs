@@ -35,8 +35,10 @@ namespace SendingMail
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddScoped<IEmailSender, EmailSender>();
-            services.AddScoped<EmailSender>();
+            //services.AddScoped<IEmailSender, EmailSender>(); // -- for SMTP
+            //services.AddScoped<EmailSender>(); // -- for SMTP
+            services.AddScoped<IEmailSender, EmailSenderGmail>(); // -- for SMTP
+            services.AddScoped<EmailSenderGmail>(); // -- for SMTP
             services.AddRazorPages();
         }
 
