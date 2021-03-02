@@ -1,0 +1,22 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div>
+    <p>@Model.Firstname</p>
+    <form method="post" asp-page="/Index">
+        <div class="form-group">
+            <label asp-for="@Model.Firstname"></label>
+            <input type="text" class="form-control" asp-for="@Model.Firstname" aria-describedby="nameHelp" placeholder="Alois">
+        </div>
+        <div class="form-group">
+            <label asp-for="@Model.Lastname"></label>
+            <input type="text" class="form-control" asp-for="@Model.Lastname" aria-describedby="nameHelp" placeholder="Pokorný">
+        </div>
+        <div>
+            <button class="btn btn-primary">Odeslat</button>
+        </div>
+    </form>
+</div>
