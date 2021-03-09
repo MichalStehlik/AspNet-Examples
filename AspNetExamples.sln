@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Links", "Links\Links.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Forms", "Forms\Forms.csproj", "{70D30A08-6922-4035-9164-34584A6FB1F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Forms2", "Forms2\Forms2.csproj", "{D3BCB8DC-8E8B-476F-B7B3-DDFAC556C263}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{70D30A08-6922-4035-9164-34584A6FB1F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{70D30A08-6922-4035-9164-34584A6FB1F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{70D30A08-6922-4035-9164-34584A6FB1F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3BCB8DC-8E8B-476F-B7B3-DDFAC556C263}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3BCB8DC-8E8B-476F-B7B3-DDFAC556C263}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3BCB8DC-8E8B-476F-B7B3-DDFAC556C263}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3BCB8DC-8E8B-476F-B7B3-DDFAC556C263}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

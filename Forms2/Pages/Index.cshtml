@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@using Forms2.Model
+@{
+    ViewData["Title"] = "Home page";
+}
+<form method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Input.Firstname"></label>
+        <input asp-for="Input.Firstname" class="form-control" placeholder="František" />
+        <span asp-validation-for="Input.Firstname" class="text-danger"></span>
+    </div>
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" asp-for="Input.Agreement">
+        <label class="form-check-label" asp-for="Input.Agreement"></label>
+        <span asp-validation-for="Input.Agreement" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Input.Classname" class="form-label"></label>
+        <select asp-for="Input.Classname" asp-items="@Model.Classnames" class="form-control">
+            <option>-- Vyberte --</option>
+        </select>
+        <span asp-validation-for="Input.Classname" class="text-danger"></span>
+    </div>
+    <div>
+        @foreach(var g in Enum.GetValues(typeof(Gender)))
+        {
+        <div class="form-check">
+            <input class="form-check-input" type="radio" asp-for="Input.Gender" value="@g">
+            <label class="form-check-label" asp-for="Input.Gender">@g</label>
+        </div>
+        }
+    </div>
+        <div>
+            <button class="btn btn-primary" type="submit">Odeslat</button>
+        </div>
+</form>
